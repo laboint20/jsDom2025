@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form e Tabella</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0056b3;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #0056b3;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #004494;
+    }
+
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+      max-width: 600px;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #0056b3;
+      color: white;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Inserisci i tuoi dati</h1>
+  <form name="utente">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" placeholder="Ins Nome">
+
+    <label for="cognome">Cognome:</label>
+    <input type="text" id="cognome" name="cognome">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+
+    <button type="button" onclick="generaTabella()">Invia</button>
+  </form>
+
+<script>
+  function generaTabella() {
+    // Accedi al form direttamente tramite il suo nome
+    let nome = utente.nome.value;
+    let cognome = utente.cognome.value;
+    let email = utente.email.value;
+
+    // Validazione base: verifica che tutti i campi siano compilati
+    if (!nome || !cognome || !email) {
+      alert("Per favore, compila tutti i campi.");
+      return;
+    }
+
+    // Genera una tabella con i dati inseriti
+    document.write(`
+      <h1 style="text-align: center; color: #0056b3;">Dati Inseriti</h1>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>${nome}</td>
+            <td>${cognome}</td>
+            <td>${email}</td>
+          </tr>
+        </tbody>
+      </table>
+    `);
+  }
+</script>
+</body>
+</html>

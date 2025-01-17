@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form e Tabella</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0056b3;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #0056b3;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #004494;
+    }
+
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+      max-width: 600px;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #0056b3;
+      color: white;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    table tr:nth-child(odd) {
+      background-color: rgb(194, 178, 211);
+    }
+  </style>
+</head>
+<body onload="document.getElementById('nome').focus()">
+  <h1>Inserisci i tuoi dati</h1>
+  <form name="utente">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="cognome">Cognome:</label>
+    <input type="text" id="cognome" name="cognome" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <button type="button" onclick="generaTabella()">Invia</button>
+  </form>
+
+  <!-- Sezione per visualizzare la tabella -->
+  <div id="tabellaRisultati">
+    <h1 style="text-align: center; color: #0056b3;">Dati Inseriti</h1>
+    <table id="tabella">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Cognome</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Le righe della tabella verranno aggiunte qui -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function generaTabella() {
+      // Accedi ai dati del form
+      let nome = utente.nome.value.trim();
+      let cognome = utente.cognome.value.trim();
+      let email = utente.email.value.trim();
+
+      // Definizione delle espressioni regolari
+      const nomeCognomeRegex = /^[A-Za-zÀ-ÿ\s]{2,}$/; // Accetta lettere, spazi e caratteri accentati, minimo 2 caratteri
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/; // Verifica il formato standard dell'email
+
+      // Validazione Nome
+      if (!nomeCognomeRegex.test(nome)) {
+        alert("Il nome deve contenere solo lettere (almeno 2 caratteri) e può includere spazi o lettere accentate.");
+        return;
+      }
+
+      // Validazione Cognome
+      if (!nomeCognomeRegex.test(cognome)) {
+        alert("Il cognome deve contenere solo lettere (almeno 2 caratteri) e può includere spazi o lettere accentate.");
+        return;
+      }
+
+      // Validazione Email
+      if (!emailRegex.test(email)) {
+        alert("Per favore, inserisci un'email valida.");
+        return;
+      }
+
+      // Crea una nuova riga della tabella
+      let nuovaRiga = `
+        <tr>
+          <td>${nome}</td>
+          <td>${cognome}</td>
+          <td>${email}</td>
+        </tr>
+      `;
+
+      // Aggiungi la nuova riga al corpo della tabella esistente
+      document.querySelector("#tabella tbody").insertAdjacentHTML("beforeend", nuovaRiga);
+
+      // Pulire i campi del modulo
+      utente.nome.value = '';
+      utente.cognome.value = '';
+      utente.email.value = '';
+      utente.nome.focus();    
+    }
+  </script>
+</body>
+</html>
